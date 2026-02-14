@@ -17,8 +17,13 @@ import javax.swing.JTextField;
 
 
 public class InicioSesion extends JFrame{
-    public InicioSesion (){
-        setTitle ("Sea ⚓︎ Strike - Log In");
+    private GestionCuentas gestion;
+    private JTextField usertxt;
+    private JPasswordField clavetxt;
+    
+    public InicioSesion(GestionCuentas gestion) {
+    this.gestion = gestion;
+        setTitle ("Sea ⚓︎ Strike");
         setResizable(false);
         setSize(800,600);
         setLocationRelativeTo(null);
@@ -42,7 +47,7 @@ public class InicioSesion extends JFrame{
         usuario.setForeground(Color.white);
         fondo.add(usuario);
         
-        JTextField usertxt = new JTextField();
+         usertxt = new JTextField();
         usertxt.setBounds(340, 235, 150, 20);
         fondo.add(usertxt);
         
@@ -52,7 +57,7 @@ public class InicioSesion extends JFrame{
         clave.setForeground(Color.white);
         fondo.add(clave);
         
-        JPasswordField clavetxt = new JPasswordField();
+         clavetxt = new JPasswordField();
         clavetxt.setBounds(340, 285, 150, 20);
         fondo.add(clavetxt);
         
@@ -74,8 +79,17 @@ public class InicioSesion extends JFrame{
         btnConfirmar.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
         btnConfirmar.setCursor(new Cursor(Cursor.HAND_CURSOR));
          btnConfirmar.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "Hora de sumerjirse en esta aventura! ");
-        });
+         String usuario = usertxt.getText();
+         String clave = new String(clavetxt.getPassword());
+
+    if (gestion.login(usuario, clave)) {
+        menuPrincipal menu = new menuPrincipal(gestion);
+        menu.setVisible(true);
+        dispose();
+    } else {
+        JOptionPane.showMessageDialog(null, "Datos incorrectos");
+    }
+});
         fondo.add(btnConfirmar);
         
         JPanel jPanel1 = new JPanel();
@@ -87,9 +101,5 @@ public class InicioSesion extends JFrame{
         
         setContentPane(fondo);
     }
-    
-    public static void main (String[]args){
-        InicioSesion login = new InicioSesion();
-        login.setVisible(true);
-    }
+
 }
