@@ -1,11 +1,16 @@
 package proyectobattleship;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
 public class GestionCuentas {
     private ArrayList<Player> cuentas = new ArrayList<>(); //guardar cuentas
     private Player currentUser;
+private String dificultad = "NORMAL"; // default obligatorio
+private int cantidadBarcos = 4;       // NORMAL = 4
+
+private String modoJuego = "TUTORIAL"; // default obligatorio
 
     
     public boolean crearCuenta(String jugador,String usuario, String clave){
@@ -40,6 +45,15 @@ public class GestionCuentas {
         return false;
     }
     
+    public boolean usuarioExiste(String usuario) {
+    for (Player p : cuentas) {
+        if (p.getUsuario().equalsIgnoreCase(usuario)) {
+            return true;
+        }
+    }
+    return false;
+}
+    
     public Player getCurrentUser() {
         return currentUser;
     }
@@ -63,4 +77,39 @@ public class GestionCuentas {
         return cuentas;
     }
     
+    public String getDificultad() {
+    return dificultad;
+}
+
+public int getCantidadBarcos() {
+    return cantidadBarcos;
+}
+
+public String getModoJuego() {
+    return modoJuego;
+}
+
+public void setDificultad(String dificultad) {
+
+    this.dificultad = dificultad;
+
+    switch (dificultad) {
+        case "EASY":
+            cantidadBarcos = 5;
+            break;
+        case "NORMAL":
+            cantidadBarcos = 4;
+            break;
+        case "EXPERT":
+            cantidadBarcos = 2;
+            break;
+        case "GENIUS":
+            cantidadBarcos = 1;
+            break;
+    }
+}
+
+public void setModoJuego(String modoJuego) {
+    this.modoJuego = modoJuego;
+}
 }

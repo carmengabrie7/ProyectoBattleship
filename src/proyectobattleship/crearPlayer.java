@@ -72,17 +72,23 @@ public class crearPlayer extends JFrame{
         btnGuardar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnGuardar.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
         btnGuardar.addActionListener(e -> {
-    boolean creado = gestion.crearCuenta(
-        nombretxt.getText(),
-        usertxt.getText(),
-        clavetxt.getText()
-    );
+
+    String nombre1 = nombretxt.getText();
+    String usuario1 = usertxt.getText();
+    String clave1 = clavetxt.getText();
+
+    boolean creado = gestion.crearCuenta(nombre1, usuario1, clave1);
 
     if (creado) {
+
+        gestion.login(usuario1, clave1);
+
         JOptionPane.showMessageDialog(null, "Cuenta creada");
+
         menuPrincipal menu = new menuPrincipal(gestion);
         menu.setVisible(true);
         dispose();
+
     } else {
         JOptionPane.showMessageDialog(null, "Error en datos");
     }

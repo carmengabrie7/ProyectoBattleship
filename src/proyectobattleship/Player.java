@@ -6,8 +6,10 @@ public class Player {
     private String usuario;
     private String clave;
     private int puntos;
+    private String rutaImagen;
     
     private String[] logs = new String[10];
+    private int indiceLog = 0;
     
     public Player(String jugador, String usuario, String clave){
         this.jugador=jugador;
@@ -15,6 +17,13 @@ public class Player {
         this.clave=clave;
         this.puntos=0;
     }
+    
+    public String getRutaImagen(){
+        return rutaImagen;
+    }
+    public void setRutaImagen(String rutaImagen) {
+    this.rutaImagen = rutaImagen;
+}
     
     public String getJugador(){
         return jugador;
@@ -44,16 +53,15 @@ public class Player {
         this.puntos=puntos;
     }
     
-    public String[] getLogs(){
-        return logs;
-    }
-    
-    //se encarga de mostrar las ultimas 10 partidas y asegura que el mas reciente tenga el primer puesto.
-     public void agregarLog(String log) {
-        for (int i = logs.length - 1; i > 0; i--) {
-            logs[i] = logs[i - 1];
-        }
-        logs[0] = log;
-    }
+
+public void agregarLog(String mensaje){
+
+    logs[indiceLog % 10] = mensaje;
+    indiceLog++;
+}
+
+public String[] getLogs(){
+    return logs;
+}
      
 }

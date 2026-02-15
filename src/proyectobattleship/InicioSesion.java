@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -78,18 +79,17 @@ public class InicioSesion extends JFrame{
         btnConfirmar.setForeground(new Color(25,68,113));
         btnConfirmar.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
         btnConfirmar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-         btnConfirmar.addActionListener(e -> {
-         String usuario = usertxt.getText();
-         String clave = new String(clavetxt.getPassword());
-
-    if (gestion.login(usuario, clave)) {
-        menuPrincipal menu = new menuPrincipal(gestion);
-        menu.setVisible(true);
-        dispose();
-    } else {
-        JOptionPane.showMessageDialog(null, "Datos incorrectos");
-    }
-});
+         btnConfirmar.addActionListener((ActionEvent e) -> {
+             String usuario1 = usertxt.getText();
+             String clave1 = new String(clavetxt.getPassword());
+        if (gestion.login(usuario1, clave1)) {
+            menuPrincipal menu = new menuPrincipal(gestion);
+            menu.setVisible(true);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Datos incorrectos");
+        }
+    });
         fondo.add(btnConfirmar);
         
         JPanel jPanel1 = new JPanel();
