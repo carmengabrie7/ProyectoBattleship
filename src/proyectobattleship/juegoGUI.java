@@ -36,7 +36,53 @@ public class juegoGUI extends JFrame {
         crearBotones();
 
         actualizarVista();
+        mostrarInstrucciones();
     }
+    
+    private void mostrarInstrucciones() {
+
+    String dificultad = juego.getDificultad();
+
+    String mensaje = "INSTRUCCIONES\n\n";
+
+    switch(dificultad){
+
+        case "EASY":
+            mensaje += "Modo EASY:\n"
+                    + "- 1 PA (5 casillas)\n"
+                    + "- 1 AZ (4 casillas)\n"
+                    + "- 1 SM (3 casillas)\n"
+                    + "- 2 DT (2 casillas)\n";
+            break;
+
+        case "NORMAL":
+            mensaje += "Modo NORMAL:\n"
+                    + "- 1 PA (5 casillas)\n"
+                    + "- 1 AZ (4 casillas)\n"
+                    + "- 1 SM (3 casillas)\n"
+                    + "- 1 DT (2 casillas)\n";
+            break;
+
+        case "EXPERT":
+            mensaje += "Modo EXPERT:\n"
+                    + "- 1 PA (5 casillas)\n"
+                    + "- 1 AZ (4 casillas)\n";
+            break;
+
+        case "GENIUS":
+            mensaje += "Modo GENIUS:\n"
+                    + "- Solo 1 PA (5 casillas)\n";
+            break;
+    }
+
+    mensaje += "\nReglas especiales:\n"
+            + "- Al hundir un barco, el tablero enemigo cambia de posición.\n"
+            + "- Los disparos anteriores en ese tablero se reinician.\n"
+            + "- El ganador recibe +3 puntos.\n"
+            + "- Si te retiras, pierdes -1 punto.\n";
+
+    JOptionPane.showMessageDialog(this, mensaje);
+}
 
     private void crearHeader(){
 
@@ -172,8 +218,40 @@ public class juegoGUI extends JFrame {
         btnRetirarse.setBounds(550,470,200,40);
 
         btnRetirarse.addActionListener(e -> {
-            dispose();
-        });
+
+    Player actual = juego.getTurnoActual();
+    Player rival = (actual == juego.getJugador1())
+            ? juego.getJugador2()
+            : juego.getJugador1();
+
+    int opcion = JOptionPane.showConfirmDialog(
+            this,
+            "Si te retiras perderás 1 punto.\n¿Deseas continuar?",
+            "Confirmar retiro",
+            JOptionPane.YES_NO_OPTION
+    );
+
+    if(opcion == JOptionPane.YES_OPTION){
+
+        // 🔥 RESTAR 1 PUNTO
+        if(actual.getPuntos() > 0)
+    actual.setPuntos(actual.getPuntos() - 1);
+
+        // 🔥 REGISTRAR LOG
+        String mensaje =
+        actual.getJugador()
+        + " se retiró del juego dejando como ganador a "
+        + rival.getJugador()
+        + " en modo " + juego.getModoJuego()
+        + " dificultad " + juego.getDificultad();
+
+        juego.getJugador1().agregarLog(mensaje);
+        juego.getJugador2().agregarLog(mensaje);
+
+        dispose();
+        new menuPrincipal(gestion).setVisible(true);
+    }
+});
 
         add(btnColocar);
         add(btnRetirarse);
@@ -181,40 +259,59 @@ public class juegoGUI extends JFrame {
 
     private void colocarBarcoDialog(){
 
-        String codigo = JOptionPane.showInputDialog(
-                this,
-                "Código (PA, AZ, SM, DT)");
+    String codigo = JOptionPane.showInputDialog(
+            this,
+            "Código (PA, AZ, SM, DT)");
 
-        if(codigo==null) return;
-
-        codigo = codigo.toUpperCase();
-
-        int fila = Integer.parseInt(
-                JOptionPane.showInputDialog("Fila (1-8)")) - 1;
-
-        int col = Integer.parseInt(
-                JOptionPane.showInputDialog("Columna (1-8)")) - 1;
-
-        int orient = JOptionPane.showConfirmDialog(
-                this,
-                "¿Horizontal?",
-                "Orientación",
-                JOptionPane.YES_NO_OPTION);
-
-        boolean horizontal =
-                (orient==JOptionPane.YES_OPTION);
-
-        boolean ok = juego.colocarBarco(
-                juego.getTurnoActual(),
-                codigo,fila,col,horizontal);
-
-        if(!ok){
-            JOptionPane.showMessageDialog(this,
-                    "No se pudo colocar barco");
-        }
-
-        actualizarVista();
+    if(codigo == null || codigo.trim().isEmpty()){
+        JOptionPane.showMessageDialog(this,
+                "Debes ingresar un código válido.");
+        return;
     }
+
+    codigo = codigo.toUpperCase();
+
+    String filaStr = JOptionPane.showInputDialog("Fila (1-8)");
+    String colStr = JOptionPane.showInputDialog("Columna (1-8)");
+
+    if(filaStr == null || colStr == null ||
+       filaStr.trim().isEmpty() || colStr.trim().isEmpty()){
+        JOptionPane.showMessageDialog(this,
+                "No puedes dejar espacios en blanco.");
+        return;
+    }
+
+    int fila, col;
+
+    try{
+        fila = Integer.parseInt(filaStr) - 1;
+        col = Integer.parseInt(colStr) - 1;
+    } catch(NumberFormatException e){
+        JOptionPane.showMessageDialog(this,
+                "Debes ingresar números válidos.");
+        return;
+    }
+
+    int orient = JOptionPane.showConfirmDialog(
+            this,
+            "¿Horizontal?",
+            "Orientación",
+            JOptionPane.YES_NO_OPTION);
+
+    boolean horizontal =
+            (orient == JOptionPane.YES_OPTION);
+
+    boolean ok = juego.colocarBarco(
+            juego.getTurnoActual(),
+            codigo,fila,col,horizontal);
+
+    if(!ok){
+        JOptionPane.showMessageDialog(this,
+                "No se pudo colocar barco");
+    }
+
+    actualizarVista();
+}
 
    private void accionCelda(int fila, int col, boolean esTablero1) {
 
@@ -226,23 +323,20 @@ public class juegoGUI extends JFrame {
 
     Player actual = juego.getTurnoActual();
 
-    // Jugador 1 solo puede atacar tablero 2
     if (actual == juego.getJugador1() && esTablero1)
         return;
 
-    // Jugador 2 solo puede atacar tablero 1
     if (actual == juego.getJugador2() && !esTablero1)
         return;
 
     String resultado = juego.atacar(fila, col);
 
-    // 🔥 BOTÓN CORRECTO SEGÚN TABLERO ATACADO
     JButton boton;
 
     if (actual == juego.getJugador1()) {
-        boton = botones2[fila][col]; // J1 ataca tablero2
+        boton = botones2[fila][col];
     } else {
-        boton = botones1[fila][col]; // J2 ataca tablero1
+        boton = botones1[fila][col];
     }
 
     if (resultado.equals("YA_DISPARADO")) {
@@ -275,15 +369,18 @@ public class juegoGUI extends JFrame {
         JOptionPane.showMessageDialog(this,
                 "¡Barco hundido!");
 
-        // 🔥 SOLO limpiar tablero afectado visualmente
-        limpiarTableroVisual(actual == juego.getJugador1() ? 2 : 1);
+        limpiarTableroVisual(
+                actual == juego.getJugador1() ? 2 : 1
+        );
     }
 
     else if (resultado.equals("GANADOR")) {
 
+        boton.setBackground(Color.RED);
+        boton.setText("X");
+
         JOptionPane.showMessageDialog(this,
-                "Ganador: "
-                        + actual.getJugador());
+                "Ganador: " + actual.getJugador());
 
         dispose();
         new menuPrincipal(gestion).setVisible(true);
@@ -350,6 +447,7 @@ public class juegoGUI extends JFrame {
 
     boolean[][] disparos;
 
+    // Disparos que recibió ESTE tablero
     if (dueño == juego.getJugador1()) {
         disparos = juego.getDisparosJ2();
     } else {
@@ -365,21 +463,27 @@ public class juegoGUI extends JFrame {
             btn.setText("");
             btn.setForeground(Color.GREEN);
 
+            // 🔴 SI FUE DISPARADO
             if(disparos[i][j]){
-                if(tablero[i][j]==null){
+
+                // 🔵 FALLO
+                if(tablero[i][j] == null){
                     btn.setBackground(Color.BLUE);
                     btn.setText("F");
                 }
+
+                // 🟡 IMPACTO (NO hundido aún)
                 else{
-                    btn.setBackground(Color.RED);
+                    btn.setBackground(Color.YELLOW);
                     btn.setText("X");
                 }
             }
 
-            if(tablero[i][j]!=null &&
+            // 🔥 MODO TUTORIAL — mostrar barcos
+            if(tablero[i][j] != null &&
                     juego.getModoJuego().equals("TUTORIAL")){
 
-                if(dueño==juego.getTurnoActual())
+                if(dueño == juego.getTurnoActual())
                     btn.setForeground(Color.WHITE);
                 else
                     btn.setForeground(Color.GRAY);

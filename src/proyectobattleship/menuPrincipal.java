@@ -496,25 +496,30 @@ public class menuPrincipal extends JFrame {
     JPanel panel = new JPanel(null);
 
     JLabel titulo = new JLabel("Mis Últimos 10 Juegos");
-    titulo.setBounds(300, 40, 300, 30);
+    titulo.setBounds(280, 40, 300, 30);
     panel.add(titulo);
 
     Player actual = gestion.getCurrentUser();
     String[] logs = actual.getLogs();
 
-    String[] columnas = {"#", "Descripción"};
-    Object[][] datos = new Object[10][2];
+    // 🔥 UNA SOLA COLUMNA
+    String[] columnas = {"Descripción"};
+
+    Object[][] datos = new Object[10][1];
 
     for (int i = 0; i < 10; i++) {
-        datos[i][0] = i + 1;
-        datos[i][1] = (logs[i] == null) ? "---" : logs[i];
+
+        // 🔥 El más reciente primero
+        datos[i][0] = (logs[i] == null)
+                ? "---"
+                : logs[i];
     }
 
     JTable tabla = new JTable(datos, columnas);
     tabla.setEnabled(false);
 
     JScrollPane scroll = new JScrollPane(tabla);
-    scroll.setBounds(100, 90, 600, 300);
+    scroll.setBounds(120, 90, 560, 300);
 
     JButton btnVolver = new JButton("Volver");
     btnVolver.setBounds(330, 420, 120, 40);

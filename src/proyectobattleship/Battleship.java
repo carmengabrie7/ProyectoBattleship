@@ -172,7 +172,6 @@ public class Battleship {
 
         Barco barco = enemigo[fila][col];
         barco.recibirImpacto();
-        enemigo[fila][col]=null;
 
         if(barco.estaHundido()) {
 
@@ -183,10 +182,11 @@ public class Battleship {
 
             moverBarcos(enemigo);
 
-            if(turnoActual==jugador1)
-                limpiarDisparos(jugador2);
-            else
-                limpiarDisparos(jugador1);
+            // limpiar disparos del jugador que disparó
+if(turnoActual == jugador1)
+    limpiarDisparos(jugador1);
+else
+    limpiarDisparos(jugador2);
 
            if(barcosRestantes1==0 || barcosRestantes2==0) {
 
