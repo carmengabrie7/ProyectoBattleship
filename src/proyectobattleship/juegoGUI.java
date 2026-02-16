@@ -233,11 +233,11 @@ public class juegoGUI extends JFrame {
 
     if(opcion == JOptionPane.YES_OPTION){
 
-        // 🔥 RESTAR 1 PUNTO
+
         if(actual.getPuntos() > 0)
     actual.setPuntos(actual.getPuntos() - 1);
 
-        // 🔥 REGISTRAR LOG
+
         String mensaje =
         actual.getJugador()
         + " se retiró del juego dejando como ganador a "
@@ -363,16 +363,16 @@ public class juegoGUI extends JFrame {
 
     else if (resultado.equals("HUNDIDO")) {
 
-        boton.setBackground(Color.RED);
-        boton.setText("X");
+    JOptionPane.showMessageDialog(this,
+            "¡Barco hundido!");
 
-        JOptionPane.showMessageDialog(this,
-                "¡Barco hundido!");
+    limpiarTableroVisual(
+            actual == juego.getJugador1() ? 2 : 1
+    );
 
-        limpiarTableroVisual(
-                actual == juego.getJugador1() ? 2 : 1
-        );
-    }
+    actualizarVista();
+    return;
+}
 
     else if (resultado.equals("GANADOR")) {
 
@@ -386,8 +386,6 @@ public class juegoGUI extends JFrame {
         new menuPrincipal(gestion).setVisible(true);
         return;
     }
-
-    actualizarVista();
 }
    
    private void limpiarTableroVisual(int numeroTablero) {
@@ -445,14 +443,10 @@ public class juegoGUI extends JFrame {
         Barco[][] tablero,
         Player dueño){
 
-    boolean[][] disparos;
-
-    // Disparos que recibió ESTE tablero
-    if (dueño == juego.getJugador1()) {
-        disparos = juego.getDisparosJ2();
-    } else {
-        disparos = juego.getDisparosJ1();
-    }
+    boolean[][] disparos =
+            (dueño == juego.getJugador1())
+                    ? juego.getDisparosJ2()
+                    : juego.getDisparosJ1();
 
     for(int i=0;i<SIZE;i++){
         for(int j=0;j<SIZE;j++){
@@ -463,34 +457,44 @@ public class juegoGUI extends JFrame {
             btn.setText("");
             btn.setForeground(Color.GREEN);
 
-            // 🔴 SI FUE DISPARADO
             if(disparos[i][j]){
 
-                // 🔵 FALLO
                 if(tablero[i][j] == null){
                     btn.setBackground(Color.BLUE);
                     btn.setText("F");
                 }
-
-                // 🟡 IMPACTO (NO hundido aún)
                 else{
-                    btn.setBackground(Color.YELLOW);
+
+                    if(tablero[i][j].estaHundido()){
+                        btn.setBackground(Color.RED);
+                    }
+                    else{
+                        btn.setBackground(Color.YELLOW);
+                    }
+
                     btn.setText("X");
                 }
             }
 
-            // 🔥 MODO TUTORIAL — mostrar barcos
-            if(tablero[i][j] != null &&
-                    juego.getModoJuego().equals("TUTORIAL")){
+            boolean mostrarBarcos = false;
 
-                if(dueño == juego.getTurnoActual())
-                    btn.setForeground(Color.WHITE);
-                else
-                    btn.setForeground(Color.GRAY);
+            if(juego.getModoJuego().equals("TUTORIAL")){
+                mostrarBarcos = true;
+            }
+            else if(juego.getModoJuego().equals("ARCADE")
+                    && juego.esColocacion()
+                    && dueño == juego.getTurnoActual()){
+                mostrarBarcos = true;
+            }
 
+            if(tablero[i][j] != null && mostrarBarcos){
+                btn.setForeground(
+                        dueño == juego.getTurnoActual()
+                                ? Color.WHITE
+                                : Color.GRAY
+                );
                 btn.setText(tablero[i][j].getCodigo());
             }
         }
     }
-}
-}
+}}

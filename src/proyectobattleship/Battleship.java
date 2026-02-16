@@ -142,70 +142,72 @@ public class Battleship {
         return true;
     }
 
-    public String atacar(int fila, int col) {
+public String atacar(int fila, int col) {
 
-        if(fase != Fase.COMBATE)
-            return "NO_COMBATE";
+    if(fase != Fase.COMBATE)
+        return "NO_COMBATE";
 
-        if(!posValida(fila,col))
-            return "FUERA";
+    if(!posValida(fila,col))
+        return "FUERA";
 
-        boolean[][] disparos =
-                (turnoActual==jugador1)
-                        ? disparosJ1
-                        : disparosJ2;
+    boolean[][] disparos =
+            (turnoActual==jugador1)
+                    ? disparosJ1
+                    : disparosJ2;
 
-        if(disparos[fila][col])
-            return "YA_DISPARADO";
+    if(disparos[fila][col])
+        return "YA_DISPARADO";
 
-        disparos[fila][col] = true;
+    disparos[fila][col] = true;
 
-        Barco[][] enemigo =
-                (turnoActual==jugador1)
-                        ? tablero2
-                        : tablero1;
+    Barco[][] enemigo =
+            (turnoActual==jugador1)
+                    ? tablero2
+                    : tablero1;
 
-        if(enemigo[fila][col]==null) {
-            cambiarTurno();
-            return "FALLO";
+    Barco barco = enemigo[fila][col];
+
+    if(barco == null){
+        cambiarTurno();
+        return "FALLO";
+    }
+
+    barco.recibirImpacto();
+
+    enemigo[fila][col] = null;
+
+    if(barco.estaHundido()){
+
+        if(turnoActual==jugador1)
+            barcosRestantes2--;
+        else
+            barcosRestantes1--;
+
+        if(barcosRestantes1==0 || barcosRestantes2==0){
+
+            turnoActual.setPuntos(
+                    turnoActual.getPuntos() + 3);
+
+            registrarLogGanador(turnoActual);
+
+            fase = Fase.TERMINADO;
+            return "GANADOR";
         }
 
-        Barco barco = enemigo[fila][col];
-        barco.recibirImpacto();
+        moverBarcos(enemigo);
 
-        if(barco.estaHundido()) {
-
-            if(turnoActual==jugador1)
-                barcosRestantes2--;
-            else
-                barcosRestantes1--;
-
-            moverBarcos(enemigo);
-
-            // limpiar disparos del jugador que disparó
-if(turnoActual == jugador1)
-    limpiarDisparos(jugador1);
-else
-    limpiarDisparos(jugador2);
-
-           if(barcosRestantes1==0 || barcosRestantes2==0) {
-
-    turnoActual.setPuntos(
-            turnoActual.getPuntos() + 3);
-
-    registrarLogGanador(turnoActual);
-
-    fase = Fase.TERMINADO;
-    return "GANADOR";
-}
-
-            cambiarTurno();
-            return "HUNDIDO";
-        }
+        if(turnoActual == jugador1)
+            limpiarDisparos(jugador1);
+        else
+            limpiarDisparos(jugador2);
 
         cambiarTurno();
-        return "IMPACTO";
+        return "HUNDIDO";
     }
+
+    cambiarTurno();
+    return "IMPACTO";
+}
 
     private void moverBarcos(Barco[][] tablero) {
 
@@ -350,11 +352,18 @@ else
                 || fase==Fase.COLOCANDO_J2;
     }
 
-    public Player getTurnoActual(){ return turnoActual; }
-    public Player getJugador1(){ return jugador1; }
-    public Player getJugador2(){ return jugador2; }
-    public Barco[][] getTablero1(){ return tablero1; }
-    public Barco[][] getTablero2(){ return tablero2; }
-    public String getModoJuego(){ return modoJuego; }
-    public String getDificultad(){ return dificultad; }
+    public Player getTurnoActual(){
+        return turnoActual; }
+    public Player getJugador1(){
+        return jugador1; }
+    public Player getJugador2(){
+        return jugador2; }
+    public Barco[][] getTablero1(){
+        return tablero1; }
+    public Barco[][] getTablero2(){
+        return tablero2; }
+    public String getModoJuego(){
+        return modoJuego; }
+    public String getDificultad(){
+        return dificultad; }
 }

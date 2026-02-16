@@ -32,7 +32,7 @@ public class InicioSesion extends JFrame{
         
         JLabel fondo = new JLabel();
         fondo.setBounds(0, 0, 800, 600);
-        ImageIcon fondoImg = new ImageIcon("src/proyectobattleship/imagenes/login2.jpg");
+        ImageIcon fondoImg = new ImageIcon("src/proyectobattleship/imagenes/login3.png");
         fondo.setIcon(new ImageIcon(fondoImg.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH)));
         fondo.setLayout(null);
         
@@ -69,7 +69,8 @@ public class InicioSesion extends JFrame{
         btnCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnCancelar.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
         btnCancelar.addActionListener(e -> {
-            
+            new menuInicial(gestion).setVisible(true);
+            dispose();
         });
         fondo.add(btnCancelar);
         

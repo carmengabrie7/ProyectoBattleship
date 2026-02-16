@@ -28,20 +28,10 @@ public class menuInicial extends JFrame {
         
         JLabel fondo = new JLabel();
         fondo.setBounds(0, 0, 800, 600);
-        ImageIcon fondoImg = new ImageIcon("src/proyectobattleship/imagenes/fondo.png");
+        ImageIcon fondoImg = new ImageIcon("src/proyectobattleship/imagenes/2.png");
         fondo.setIcon(new ImageIcon(fondoImg.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH)));
         fondo.setLayout(null);
         
-        JLabel titulo = new JLabel();
-        ImageIcon iconoOriginal = new ImageIcon(getClass().getResource("/proyectobattleship/imagenes/titulo.png"));
-        Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(400, 350, Image.SCALE_SMOOTH);
-
-        ImageIcon icono = new ImageIcon(imagenEscalada);
-
-        titulo.setIcon(icono);
-        titulo.setBounds(200, 50, 400, 350);
-
-
         JButton btnLogin = new JButton("Login");
         btnLogin.setBounds(180, 400, 100, 50);
         btnLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -66,7 +56,6 @@ public class menuInicial extends JFrame {
         btnSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnSalir.addActionListener(e -> System.exit(0));
         
-        fondo.add(titulo);
         fondo.add(btnSalir);
         fondo.add(btnCrear);
         fondo.add(btnLogin);

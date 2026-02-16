@@ -51,10 +51,11 @@ public class menuPrincipal extends JFrame {
         add(contenedor);
     }
 
-    // ================= MENU PRINCIPAL =================
-    private JPanel crearPanelMenu() {
 
-        JPanel panel = new JPanel(null);
+    private JLabel crearPanelMenu() {
+
+        JLabel panel = new JLabel(new ImageIcon("src//proyectobattleship/imagenes/4.png"));
+        panel.setLayout(null);
 
         JButton btnJugar = new JButton("Jugar");
         btnJugar.setBounds(500, 100, 150, 50);
@@ -70,20 +71,18 @@ public class menuPrincipal extends JFrame {
 
     Player jugador1 = gestion.getCurrentUser();
 
-    // Crear lista de oponentes (sin incluir jugador actual)
+
     java.util.ArrayList<Player> cuentas =
             new java.util.ArrayList<>(gestion.getCuentas());
 
     cuentas.remove(jugador1);
 
-    // Crear arreglo de nombres para el chooser
     String[] opciones = new String[cuentas.size()];
 
     for (int i = 0; i < cuentas.size(); i++) {
         opciones[i] = cuentas.get(i).getUsuario();
     }
 
-    // Mostrar selector tipo chooser
     String seleccionado = (String) JOptionPane.showInputDialog(
             this,
             "Selecciona el oponente:",
@@ -94,7 +93,7 @@ public class menuPrincipal extends JFrame {
             opciones[0]
     );
 
-    // Si cancela
+
     if (seleccionado == null) return;
 
     Player jugador2 = null;
@@ -106,7 +105,7 @@ public class menuPrincipal extends JFrame {
         }
     }
 
-    // Crear juego con configuración actual
+
     Battleship juego = new Battleship(
             jugador1,
             jugador2,
@@ -159,11 +158,11 @@ public class menuPrincipal extends JFrame {
         return panel;
     }
 
-    // ================= PERFIL =================
-    private JPanel crearPanelPerfilMenu() {
+    private JLabel crearPanelPerfilMenu() {
 
-    JPanel panel = new JPanel(null);
-
+    JLabel panel = new JLabel(new ImageIcon("src//proyectobattleship/imagenes/fondoP.png"));
+    panel.setLayout(null);
+    
     JLabel titulo = new JLabel("MI PERFIL");
     titulo.setBounds(330, 100, 200, 30);
 
@@ -205,9 +204,11 @@ public class menuPrincipal extends JFrame {
     return panel;
 }
     
-   private JPanel crearPanelPerfilVer() {
+   private JLabel crearPanelPerfilVer() {
 
-    JPanel panel = new JPanel(null);
+    JLabel panel = new JLabel(new ImageIcon("src//proyectobattleship/imagenes/fondoP.png"));
+    panel.setLayout(null);
+    
     Player actual = gestion.getCurrentUser();
 
     JLabel lblNombre = new JLabel("Nombre:");
@@ -231,10 +232,10 @@ public class menuPrincipal extends JFrame {
     txtClave.setBounds(300, 140, 150, 30);
     txtClave.setEnabled(false);
 
-    // 🔥 LABEL GLOBAL PARA PUNTOS
+
     lblPuntosPerfil = new JLabel();
     lblPuntosPerfil.setBounds(200, 180, 200, 30);
-    actualizarPerfil(); // actualiza puntos
+    actualizarPerfil();
 
     JLabel lblImagen = new JLabel();
     lblImagen.setBounds(200, 220, 150, 150);
@@ -318,7 +319,7 @@ public class menuPrincipal extends JFrame {
     JButton btnVolver = new JButton("Volver");
     btnVolver.setBounds(480, 400, 120, 40);
     btnVolver.addActionListener(e -> {
-        actualizarPerfil(); // 🔥 actualiza puntos al volver
+        actualizarPerfil(); 
         cardLayout.show(contenedor, "perfilMenu");
     });
 
@@ -346,10 +347,11 @@ public class menuPrincipal extends JFrame {
     }
 }
    
-    // ================= CONFIGURACION =================
-   private JPanel crearPanelConfigMenu() {
+   private JLabel crearPanelConfigMenu() {
 
-    JPanel panel = new JPanel(null);
+    JLabel panel = new JLabel(new ImageIcon("src//proyectobattleship/imagenes/fondoP.png"));
+    panel.setLayout(null);
+    
 
     JLabel titulo = new JLabel("CONFIGURACIÓN");
     titulo.setBounds(310, 100, 200, 30);
@@ -380,9 +382,11 @@ public class menuPrincipal extends JFrame {
     return panel;
 }
    
-   private JPanel crearPanelDificultad() {
+   private JLabel crearPanelDificultad() {
 
-    JPanel panel = new JPanel(null);
+    JLabel panel = new JLabel(new ImageIcon("src//proyectobattleship/imagenes/fondoP.png"));
+    panel.setLayout(null);
+    
 
     JLabel titulo = new JLabel("Seleccionar Dificultad");
     titulo.setBounds(280, 80, 250, 30);
@@ -419,9 +423,10 @@ public class menuPrincipal extends JFrame {
     return panel;
 }
    
-   private JPanel crearPanelModoJuego() {
+   private JLabel crearPanelModoJuego() {
 
-    JPanel panel = new JPanel(null);
+    JLabel panel = new JLabel(new ImageIcon("src//proyectobattleship/imagenes/fondoP.png"));
+    panel.setLayout(null);
 
     JLabel titulo = new JLabel("Seleccionar Modo de Juego");
     titulo.setBounds(260, 80, 300, 30);
@@ -457,10 +462,11 @@ public class menuPrincipal extends JFrame {
     return panel;
 }
 
-    // ================= REPORTES =================
-   private JPanel crearPanelReportesMenu() {
+   private JLabel crearPanelReportesMenu() {
 
-    JPanel panel = new JPanel(null);
+    JLabel panel = new JLabel(new ImageIcon("src//proyectobattleship/imagenes/fondoP.png"));
+    panel.setLayout(null);
+    
 
     JLabel titulo = new JLabel("REPORTES");
     titulo.setBounds(330, 100, 200, 30);
@@ -491,9 +497,10 @@ public class menuPrincipal extends JFrame {
     return panel;
 }
    
-  private JPanel crearPanelUltimosJuegos() {
+  private JLabel crearPanelUltimosJuegos() {
 
-    JPanel panel = new JPanel(null);
+    JLabel panel = new JLabel(new ImageIcon("src//proyectobattleship/imagenes/fondoP.png"));
+    panel.setLayout(null);
 
     JLabel titulo = new JLabel("Mis Últimos 10 Juegos");
     titulo.setBounds(280, 40, 300, 30);
@@ -502,14 +509,12 @@ public class menuPrincipal extends JFrame {
     Player actual = gestion.getCurrentUser();
     String[] logs = actual.getLogs();
 
-    // 🔥 UNA SOLA COLUMNA
     String[] columnas = {"Descripción"};
 
     Object[][] datos = new Object[10][1];
 
     for (int i = 0; i < 10; i++) {
 
-        // 🔥 El más reciente primero
         datos[i][0] = (logs[i] == null)
                 ? "---"
                 : logs[i];
@@ -533,9 +538,11 @@ public class menuPrincipal extends JFrame {
     return panel;
 }
    
-  private JPanel crearPanelRanking() {
+  private JLabel crearPanelRanking() {
 
-    JPanel panel = new JPanel(null);
+    JLabel panel = new JLabel(new ImageIcon("src//proyectobattleship/imagenes/fondoP.png"));
+    panel.setLayout(null);
+    
 
     JLabel titulo = new JLabel("Ranking de Jugadores");
     titulo.setBounds(300, 40, 300, 30);

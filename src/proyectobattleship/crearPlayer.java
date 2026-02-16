@@ -3,7 +3,9 @@ package proyectobattleship;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.Image;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,12 +26,10 @@ public class crearPlayer extends JFrame{
         
         JLabel fondo = new JLabel();
         fondo.setBounds(0, 0, 800, 600);
+        ImageIcon fondoImg = new ImageIcon("src/proyectobattleship/imagenes/createPlayer.png");
+        fondo.setIcon(new ImageIcon(fondoImg.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH)));
         fondo.setLayout(null);
         
-        JLabel titulo = new JLabel("CREAR PLAYER");
-        titulo.setBounds(280, 90, 250, 200);
-        titulo.setFont(new Font("Trebuchet MS",Font.PLAIN,35));
-        titulo.setForeground(Color.white);
         
         JLabel nombre = new JLabel("Nombre:");
         nombre.setBounds(247, 150, 250, 200);
@@ -62,7 +62,8 @@ public class crearPlayer extends JFrame{
         btnCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnCancelar.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
         btnCancelar.addActionListener(e->{
-            
+            new menuInicial(gestion).setVisible(true);
+            dispose();
         });
         
         JButton btnGuardar = new JButton("Guardar");
@@ -95,7 +96,6 @@ public class crearPlayer extends JFrame{
 });
         
         
-        fondo.add(titulo);
         fondo.add(nombre);
         fondo.add(nombretxt);
         fondo.add(usuario);
