@@ -24,7 +24,7 @@ public class InicioSesion extends JFrame{
     
     public InicioSesion(GestionCuentas gestion) {
     this.gestion = gestion;
-        setTitle ("Sea ⚓︎ Strike");
+        setTitle ("Cruel ⚓︎ Waters");
         setResizable(false);
         setSize(800,600);
         setLocationRelativeTo(null);
@@ -36,11 +36,11 @@ public class InicioSesion extends JFrame{
         fondo.setIcon(new ImageIcon(fondoImg.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH)));
         fondo.setLayout(null);
         
-        JLabel titulo = new JLabel("LOG IN");
+        /*JLabel titulo = new JLabel("LOG IN");
         titulo.setBounds(345, 110, 160, 150);
         titulo.setFont(new Font("Trebuchet MS",Font.PLAIN,35));
         titulo.setForeground(Color.white);
-        fondo.add(titulo);
+        fondo.add(titulo);*/
         
         JLabel usuario= new JLabel("Usuario: ");
         usuario.setBounds(250, 180, 130, 130);
@@ -94,7 +94,7 @@ public class InicioSesion extends JFrame{
         fondo.add(btnConfirmar);
         
         JPanel jPanel1 = new JPanel();
-        jPanel1.setBounds(220, 120, 350, 350);
+        jPanel1.setBounds(220, 210, 360, 250);
         jPanel1.setBackground(new Color(73, 117, 158, 120)); // 120 = transparencia
         jPanel1.setBorder(BorderFactory.createLineBorder(new Color (172,202,229),5));
         jPanel1.setOpaque(true);

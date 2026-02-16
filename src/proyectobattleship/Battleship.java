@@ -144,46 +144,48 @@ public class Battleship {
 
 public String atacar(int fila, int col) {
 
-    if(fase != Fase.COMBATE)
+    if (fase != Fase.COMBATE)
         return "NO_COMBATE";
 
-    if(!posValida(fila,col))
+    if (!posValida(fila, col))
         return "FUERA";
 
     boolean[][] disparos =
-            (turnoActual==jugador1)
+            (turnoActual == jugador1)
                     ? disparosJ1
                     : disparosJ2;
 
-    if(disparos[fila][col])
+    if (disparos[fila][col])
         return "YA_DISPARADO";
 
     disparos[fila][col] = true;
 
     Barco[][] enemigo =
-            (turnoActual==jugador1)
+            (turnoActual == jugador1)
                     ? tablero2
                     : tablero1;
 
     Barco barco = enemigo[fila][col];
 
-    if(barco == null){
+    // 🔵 FALLO
+    if (barco == null) {
         cambiarTurno();
         return "FALLO";
     }
 
+    // 🟡 IMPACTO
     barco.recibirImpacto();
 
-    enemigo[fila][col] = null;
+    // 🔴 SI SE HUNDIÓ
+    if (barco.estaHundido()) {
 
-    if(barco.estaHundido()){
-
-        if(turnoActual==jugador1)
+        if (turnoActual == jugador1)
             barcosRestantes2--;
         else
             barcosRestantes1--;
 
-        if(barcosRestantes1==0 || barcosRestantes2==0){
+        // 🔥 Si ya no quedan barcos → GANADOR
+        if (barcosRestantes1 == 0 || barcosRestantes2 == 0) {
 
             turnoActual.setPuntos(
                     turnoActual.getPuntos() + 3);
@@ -194,9 +196,11 @@ public String atacar(int fila, int col) {
             return "GANADOR";
         }
 
+        // 🔥 Mover barcos SOLO si aún quedan
         moverBarcos(enemigo);
 
-        if(turnoActual == jugador1)
+        // 🔥 Reiniciar disparos del jugador actual
+        if (turnoActual == jugador1)
             limpiarDisparos(jugador1);
         else
             limpiarDisparos(jugador2);

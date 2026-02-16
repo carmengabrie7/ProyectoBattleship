@@ -457,25 +457,28 @@ public class juegoGUI extends JFrame {
             btn.setText("");
             btn.setForeground(Color.GREEN);
 
+
             if(disparos[i][j]){
 
-                if(tablero[i][j] == null){
-                    btn.setBackground(Color.BLUE);
-                    btn.setText("F");
-                }
-                else{
+                
+                if(tablero[i][j] != null){
 
                     if(tablero[i][j].estaHundido()){
                         btn.setBackground(Color.RED);
-                    }
-                    else{
+                    }else{
                         btn.setBackground(Color.YELLOW);
                     }
 
                     btn.setText("X");
                 }
+                else{
+                    
+                    btn.setBackground(Color.BLUE);
+                    btn.setText("F");
+                }
             }
 
+            
             boolean mostrarBarcos = false;
 
             if(juego.getModoJuego().equals("TUTORIAL")){
@@ -497,4 +500,5 @@ public class juegoGUI extends JFrame {
             }
         }
     }
-}}
+}
+}

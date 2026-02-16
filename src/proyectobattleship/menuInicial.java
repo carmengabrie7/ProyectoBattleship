@@ -17,7 +17,7 @@ public class menuInicial extends JFrame {
     public menuInicial(GestionCuentas gestion) {
     this.gestion = gestion;
     
-        setTitle("Sea ⚓︎ Strike");
+        setTitle("Cruel ⚓︎ Waters");
         setSize(800,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
@@ -32,9 +32,14 @@ public class menuInicial extends JFrame {
         fondo.setIcon(new ImageIcon(fondoImg.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH)));
         fondo.setLayout(null);
         
-        JButton btnLogin = new JButton("Login");
-        btnLogin.setBounds(180, 400, 100, 50);
+        JButton btnLogin = new JButton("LOGIN");
+        btnLogin.setBounds(180, 440, 100, 50);
+        btnLogin.setBorder(BorderFactory.createLineBorder(Color.gray,5));
+        btnLogin.setBackground(new Color(37,30,36));
+        btnLogin.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
+        btnLogin.setForeground(Color.WHITE);
         btnLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnLogin.setFocusPainted(false);
 
         btnLogin.addActionListener(e -> {
         InicioSesion logIn = new InicioSesion(gestion);
@@ -42,8 +47,13 @@ public class menuInicial extends JFrame {
         dispose();
         });
         
-        JButton btnCrear = new JButton("Crear Player");
-        btnCrear.setBounds(320, 400, 140, 50);
+        JButton btnCrear = new JButton("CREAR PLAYER");
+        btnCrear.setBounds(320, 440, 140, 50);
+        btnCrear.setBorder(BorderFactory.createLineBorder(Color.gray,5));
+        btnCrear.setBackground(new Color(37,30,36));
+        btnCrear.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
+        btnCrear.setForeground(Color.WHITE);
+        btnCrear.setFocusPainted(false);
         btnCrear.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnCrear.addActionListener(e->{
             crearPlayer signUp = new crearPlayer(gestion);
@@ -51,8 +61,13 @@ public class menuInicial extends JFrame {
             dispose();
         });
         
-        JButton btnSalir = new JButton("Salir");
-        btnSalir.setBounds(500, 400, 100, 50);
+        JButton btnSalir = new JButton("SALIR");
+        btnSalir.setBounds(500, 440, 100, 50);
+        btnSalir.setBorder(BorderFactory.createLineBorder(Color.gray,5));
+        btnSalir.setBackground(new Color(37,30,36));
+        btnSalir.setForeground(Color.WHITE);
+        btnSalir.setFocusPainted(false);
+        btnSalir.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
         btnSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnSalir.addActionListener(e -> System.exit(0));
         

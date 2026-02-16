@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
@@ -104,6 +105,13 @@ public class crearPlayer extends JFrame{
         fondo.add(clavetxt);
         fondo.add(btnGuardar);
         fondo.add(btnCancelar);
+        
+        JPanel jPanel1 = new JPanel();
+        jPanel1.setBounds(220, 210, 360, 250);
+        jPanel1.setBackground(new Color(73, 117, 158, 120)); // 120 = transparencia
+        jPanel1.setBorder(BorderFactory.createLineBorder(new Color (172,202,229),5));
+        jPanel1.setOpaque(true);
+        fondo.add(jPanel1);
         
         setContentPane(fondo);
     }

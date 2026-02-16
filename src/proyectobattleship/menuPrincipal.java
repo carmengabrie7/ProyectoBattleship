@@ -58,9 +58,13 @@ public class menuPrincipal extends JFrame {
         panel.setLayout(null);
 
         JButton btnJugar = new JButton("Jugar");
-        btnJugar.setBounds(500, 100, 150, 50);
+        btnJugar.setBounds(600, 100, 150, 50);
         btnJugar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnJugar.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
+        btnJugar.setBorder(BorderFactory.createLineBorder(Color.gray,5));
+        btnJugar.setBackground(new Color(37,30,36));
+        btnJugar.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
+        btnJugar.setForeground(Color.WHITE);
+        btnJugar.setFocusPainted(false);
         btnJugar.addActionListener(e -> {
 
     if (gestion.getCuentas().size() < 2) {
@@ -117,32 +121,48 @@ public class menuPrincipal extends JFrame {
 });
 
         JButton btnConfig = new JButton("Configuracion");
-        btnConfig.setBounds(500, 180, 150, 50);
+        btnConfig.setBounds(600, 180, 150, 50);
         btnConfig.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnConfig.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
+        btnConfig.setBorder(BorderFactory.createLineBorder(Color.gray,5));
+        btnConfig.setBackground(new Color(37,30,36));
+        btnConfig.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
+        btnConfig.setForeground(Color.WHITE);
+        btnConfig.setFocusPainted(false);
         btnConfig.addActionListener(e -> {
     cardLayout.show(contenedor, "configMenu");
 });
         JButton btnReportes = new JButton("Reportes");
-        btnReportes.setBounds(500, 260, 150, 50);
+        btnReportes.setBounds(600, 260, 150, 50);
         btnReportes.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnReportes.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
+        btnReportes.setBorder(BorderFactory.createLineBorder(Color.gray,5));
+        btnReportes.setBackground(new Color(37,30,36));
+        btnReportes.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
+        btnReportes.setForeground(Color.WHITE);
+        btnReportes.setFocusPainted(false);
         btnReportes.addActionListener(e -> {
     cardLayout.show(contenedor, "reportesMenu");
 });
 
         JButton btnPerfil = new JButton("Mi perfil");
-        btnPerfil.setBounds(500, 340, 150, 50);
+        btnPerfil.setBounds(600, 340, 150, 50);
         btnPerfil.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnPerfil.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
+        btnPerfil.setBorder(BorderFactory.createLineBorder(Color.gray,5));
+        btnPerfil.setBackground(new Color(37,30,36));
+        btnPerfil.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
+        btnPerfil.setForeground(Color.WHITE);
+        btnPerfil.setFocusPainted(false);
         btnPerfil.addActionListener(e -> {
     cardLayout.show(contenedor, "perfilMenu");
 });
 
         JButton btnSalir = new JButton("Cerrar Sesion");
-        btnSalir.setBounds(500, 420, 150, 50);
+        btnSalir.setBounds(600, 420, 150, 50);
         btnSalir.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnSalir.setFont(new Font("Trebuchet MS", Font.PLAIN, 15));
+        btnSalir.setBorder(BorderFactory.createLineBorder(Color.gray,5));
+        btnSalir.setBackground(new Color(37,30,36));
+        btnSalir.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
+        btnSalir.setForeground(Color.WHITE);
+        btnSalir.setFocusPainted(false);
         btnSalir.addActionListener(e -> {
             gestion.logout();
             new menuInicial(gestion).setVisible(true);
