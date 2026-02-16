@@ -29,7 +29,7 @@ public class menuPrincipal extends JFrame {
     public menuPrincipal(GestionCuentas gestion) {
         this.gestion = gestion;
 
-        setTitle("Sea ⚓︎ Strike - Menu Principal");
+        setTitle("Cruel ⚓︎ Waters");
         setResizable(false);
         setSize(800, 600);
         setLocationRelativeTo(null);

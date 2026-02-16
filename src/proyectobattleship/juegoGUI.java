@@ -21,7 +21,7 @@ public class juegoGUI extends JFrame {
     this.juego = juego;
     this.gestion = gestion;
 
-        setTitle("Sea ⚓ Strike - Juego");
+        setTitle("Cruel ⚓ Waters");
         setSize(1000,650);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

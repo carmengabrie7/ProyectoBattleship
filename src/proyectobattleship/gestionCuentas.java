@@ -8,7 +8,7 @@ public class GestionCuentas {
     private ArrayList<Player> cuentas = new ArrayList<>(); //guardar cuentas
     private Player currentUser;
 private String dificultad = "NORMAL"; // default obligatorio
-private int cantidadBarcos = 4;       // NORMAL = 4
+private int cantidadBarcos = 4;       // normal = 4
 
 private String modoJuego = "TUTORIAL"; // default obligatorio
 
@@ -112,4 +112,5 @@ public void setDificultad(String dificultad) {
 public void setModoJuego(String modoJuego) {
     this.modoJuego = modoJuego;
 }
+
 }

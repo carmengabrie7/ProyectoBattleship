@@ -19,7 +19,7 @@ public class crearPlayer extends JFrame{
 
     public crearPlayer(GestionCuentas gestion) {
     this.gestion = gestion;
-    setTitle ("Sea ⚓︎ Strike");
+    setTitle ("Cruel ⚓︎ Waters");
         setResizable(false);
         setSize(800,600);
         setLocationRelativeTo(null);
@@ -58,10 +58,11 @@ public class crearPlayer extends JFrame{
         
         JButton btnCancelar = new JButton("Cancelar");
         btnCancelar.setBounds(260, 390, 100, 45);
-        btnCancelar.setBorder(BorderFactory.createLineBorder(new Color(172,202,229),5));
-        btnCancelar.setForeground(new Color(25,68,113));
+        btnCancelar.setBorder(BorderFactory.createLineBorder(new Color(130, 134, 143),5));
+        btnCancelar.setBackground(new Color(71,80,95));
         btnCancelar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnCancelar.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
+        btnCancelar.setForeground(Color.white);
         btnCancelar.addActionListener(e->{
             new menuInicial(gestion).setVisible(true);
             dispose();
@@ -69,10 +70,11 @@ public class crearPlayer extends JFrame{
         
         JButton btnGuardar = new JButton("Guardar");
         btnGuardar.setBounds(420, 390, 100, 45);
-        btnGuardar.setBorder(BorderFactory.createLineBorder(new Color(172,202,229),5));
-        btnGuardar.setForeground(new Color(25,68,113));
+        btnGuardar.setBorder(BorderFactory.createLineBorder(new Color(130, 134, 143),5));
+        btnGuardar.setBackground(new Color(71,80,95));
         btnGuardar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnGuardar.setFont(new Font("Trebuchet MS",Font.PLAIN,15));
+        btnGuardar.setForeground(Color.white);
         btnGuardar.addActionListener(e -> {
 
     String nombre1 = nombretxt.getText();
@@ -108,8 +110,8 @@ public class crearPlayer extends JFrame{
         
         JPanel jPanel1 = new JPanel();
         jPanel1.setBounds(220, 210, 360, 250);
-        jPanel1.setBackground(new Color(73, 117, 158, 120)); // 120 = transparencia
-        jPanel1.setBorder(BorderFactory.createLineBorder(new Color (172,202,229),5));
+        jPanel1.setBackground(new Color(83, 124, 159, 120)); // 120 = transparencia
+        jPanel1.setBorder(BorderFactory.createLineBorder(new Color (45, 97, 142),7));
         jPanel1.setOpaque(true);
         fondo.add(jPanel1);
         

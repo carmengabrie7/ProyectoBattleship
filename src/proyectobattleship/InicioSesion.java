@@ -36,12 +36,6 @@ public class InicioSesion extends JFrame{
         fondo.setIcon(new ImageIcon(fondoImg.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH)));
         fondo.setLayout(null);
         
-        /*JLabel titulo = new JLabel("LOG IN");
-        titulo.setBounds(345, 110, 160, 150);
-        titulo.setFont(new Font("Trebuchet MS",Font.PLAIN,35));
-        titulo.setForeground(Color.white);
-        fondo.add(titulo);*/
-        
         JLabel usuario= new JLabel("Usuario: ");
         usuario.setBounds(250, 180, 130, 130);
         usuario.setFont(new Font("Trebuchet MS",Font.PLAIN,20));

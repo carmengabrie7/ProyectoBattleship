@@ -4,7 +4,8 @@ import java.util.*;
 
 public class Battleship {
 
-    private final int SIZE = 8;
+    //constante, igual para todos los juegos
+    private static final int SIZE = 8;
 
     private Barco[][] tablero1 = new Barco[SIZE][SIZE];
     private Barco[][] tablero2 = new Barco[SIZE][SIZE];
@@ -150,6 +151,7 @@ public String atacar(int fila, int col) {
     if (!posValida(fila, col))
         return "FUERA";
 
+    
     boolean[][] disparos =
             (turnoActual == jugador1)
                     ? disparosJ1
@@ -167,16 +169,13 @@ public String atacar(int fila, int col) {
 
     Barco barco = enemigo[fila][col];
 
-    // 🔵 FALLO
     if (barco == null) {
         cambiarTurno();
         return "FALLO";
     }
 
-    // 🟡 IMPACTO
     barco.recibirImpacto();
 
-    // 🔴 SI SE HUNDIÓ
     if (barco.estaHundido()) {
 
         if (turnoActual == jugador1)
@@ -184,7 +183,6 @@ public String atacar(int fila, int col) {
         else
             barcosRestantes1--;
 
-        // 🔥 Si ya no quedan barcos → GANADOR
         if (barcosRestantes1 == 0 || barcosRestantes2 == 0) {
 
             turnoActual.setPuntos(
@@ -196,10 +194,8 @@ public String atacar(int fila, int col) {
             return "GANADOR";
         }
 
-        // 🔥 Mover barcos SOLO si aún quedan
         moverBarcos(enemigo);
 
-        // 🔥 Reiniciar disparos del jugador actual
         if (turnoActual == jugador1)
             limpiarDisparos(jugador1);
         else
@@ -358,16 +354,22 @@ public String atacar(int fila, int col) {
 
     public Player getTurnoActual(){
         return turnoActual; }
+    
     public Player getJugador1(){
         return jugador1; }
+    
     public Player getJugador2(){
         return jugador2; }
+    
     public Barco[][] getTablero1(){
         return tablero1; }
+    
     public Barco[][] getTablero2(){
         return tablero2; }
+    
     public String getModoJuego(){
         return modoJuego; }
+    
     public String getDificultad(){
         return dificultad; }
 }
